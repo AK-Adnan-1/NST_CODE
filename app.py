@@ -55,8 +55,8 @@ def allowed_file(filename):
 def style_transfer(content_image, style_image, encoder, decoder, alpha, device):
     content_image = content_image.copy()
     style_image = style_image.copy()
-    content_image.thumbnail((200, 200))
-    style_image.thumbnail((200, 200))
+    content_image.thumbnail((160, 160))
+    style_image.thumbnail((160, 160))
 
     to_tensor = transforms.ToTensor()
     content_image = to_tensor(content_image).unsqueeze(0).to(device)
