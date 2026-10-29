@@ -113,6 +113,12 @@ def index():
             style_filename = form.style_path.data 
 
 
+        if not content_filename:
+            error = "Please upload content image"
+        elif not style_filename:
+            error = "Please upload style image"
+
+        
         if content_filename and style_filename:
             content_path = os.path.join(app.config['UPLOAD_FOLDER'], content_filename)
             style_path = os.path.join(app.config['UPLOAD_FOLDER'], style_filename) 
@@ -132,12 +138,7 @@ def index():
 
             except Exception as e:
                 error = str(e) 
-
-    else:
-        if not content_filename:
-            error = 'Please upload content image'
-        if not style_filename:
-            error = 'Please upload style image' 
+ 
 
 
     return render_template('index.html', form=form, result_image=result_image, content_image=content_filename,
