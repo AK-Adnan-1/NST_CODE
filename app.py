@@ -52,19 +52,16 @@ def allowed_file(filename):
 
 
 
-def style_transfer(content_image, style_image, encoder, decoder, alpha, device): 
-    content_transform = transforms.Compose([
-        transforms.Resize(256),
-        transforms.ToTensor() 
-    ])
+def style_transfer(content_image, style_image, encoder, decoder, alpha, device):
+    content_image = content_image.copy()
+    style_image = style_image.copy()
+    content_image.thumbnail((200, 200))
+    style_image.thumbnail((200, 200))
 
-    style_transform = transforms.Compose([
-            transforms.Resize(256),
-            transforms.ToTensor() 
-    ]) 
-
-    content_image = content_transform(content_image).unsqueeze(0).to(device) 
-    style_image = style_transform(style_image).unsqueeze(0).to(device) 
+    to_tensor = transforms.ToTensor()
+    content_image = to_tensor(content_image).unsqueeze(0).to(device)
+    style_image = to_tensor(style_image).unsqueeze(0).to(device)
+    
 
     with torch.no_grad():
         content_feats = encoder(content_image, is_test=True)
