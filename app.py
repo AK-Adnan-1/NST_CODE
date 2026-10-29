@@ -10,6 +10,9 @@ from PIL import Image
 from torchvision import transforms
 import io
 
+torch.set_num_threads(1)
+torch.set_grad_enabled(False) 
+
 # Import your existing AdaIN code
 from utils.models import VGGEncoder, Decoder
 from utils.utils import adaptive_instance_normalization, calc_mean_std
